@@ -1,0 +1,16 @@
+{
+  "name": "teaboom-product-card",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Адаптивная карточка товара «Ананасовый улун» для Teaboom.ru",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.105.2",
+    "vite": "^8.3.4"
+  }
+}

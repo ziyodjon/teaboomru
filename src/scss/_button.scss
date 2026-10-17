@@ -1,0 +1,67 @@
+@use 'mixins' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-size);
+  padding: 0 var(--space-6);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition:
+    background-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+
+  &__icon {
+    flex: none;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &--primary {
+    min-height: 3.5rem;
+    background: var(--color-accent);
+    color: var(--color-text);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 0 var(--color-accent-active);
+
+    @include hover {
+      background: var(--color-accent-hover);
+      box-shadow: 0 2px 0 var(--color-accent-active), 0 8px 20px var(--color-accent-shadow);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      background: var(--color-accent-active);
+      box-shadow: 0 0 0 var(--color-accent-active);
+      transform: translateY(2px);
+    }
+  }
+}
+
+.buy-box__submit {
+  width: 100%;
+
+  @container (min-width: 30rem) {
+    width: auto;
+    min-width: 13.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button--primary:hover,
+  .button--primary:active {
+    transform: none;
+  }
+}

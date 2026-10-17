@@ -1,0 +1,188 @@
+@use 'mixins' as *;
+
+.buy-box {
+  container-type: inline-size;
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+
+  @include from(sm) {
+    padding: var(--space-5);
+  }
+
+  &__footer {
+    display: grid;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+
+    @container (min-width: 30rem) {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+  }
+
+  &__noscript {
+    color: var(--color-sale);
+    font-size: 0.875rem;
+  }
+}
+
+// --- Выбор фасовки: нативная radio-группа ---
+.pack-picker {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  &__legend {
+    padding: 0;
+    margin-bottom: var(--space-3);
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    // резерв высоты до отрисовки вариантов скриптом
+    min-height: calc(2 * 4rem + var(--space-2));
+
+    @container (min-width: 30rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      min-height: 4rem;
+    }
+  }
+}
+
+.pack-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.125rem;
+    min-height: 4rem;
+    height: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    line-height: 1.25;
+    transition:
+      border-color var(--transition),
+      background-color var(--transition),
+      box-shadow var(--transition);
+
+    // Индикатор выбора: пустой кружок → кружок с галочкой
+    &::after {
+      content: '';
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      width: 1.125rem;
+      height: 1.125rem;
+      border: 1.5px solid var(--color-border-strong);
+      border-radius: 50%;
+      background: var(--color-surface) center / 0.75rem no-repeat;
+      transition: background-color var(--transition), border-color var(--transition);
+    }
+  }
+
+  &__weight {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  &__price {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @include hover {
+    .pack-option__card {
+      border-color: var(--color-text-muted);
+    }
+  }
+
+  &__input:checked + &__card {
+    background: var(--color-selected-bg);
+    border-color: var(--color-selected);
+    box-shadow: inset 0 0 0 1px var(--color-selected);
+
+    &::after {
+      border-color: var(--color-selected);
+      background-color: var(--color-selected);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+  }
+
+  &__input:checked + &__card &__price {
+    color: var(--color-text);
+  }
+
+  &__input:focus-visible + &__card {
+    @include focus-ring(2px);
+  }
+}
+
+// --- Цена ---
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  min-height: 4.25rem;
+  font-variant-numeric: tabular-nums;
+
+  &__current {
+    font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-sale);
+    white-space: nowrap;
+  }
+
+  &__old {
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+
+    s {
+      text-decoration-thickness: 1.5px;
+    }
+  }
+
+  &__badge {
+    align-self: center;
+    padding: 0.125rem var(--space-2);
+    background: var(--color-sale-bg);
+    color: #a8101a;
+    border-radius: var(--radius-pill);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+
+  &__unit {
+    flex-basis: 100%;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  [hidden] {
+    display: none;
+  }
+}

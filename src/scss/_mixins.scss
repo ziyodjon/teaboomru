@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+@mixin from($breakpoint) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+// Hover только для устройств с настоящим курсором — без «залипания» на тач-экранах
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin focus-ring($offset: 3px) {
+  outline: 3px solid var(--color-focus);
+  outline-offset: $offset;
+}

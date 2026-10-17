@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ананасовый улун — Чайный Бум</title>
+    <meta
+      name="description"
+      content="Ананасовый улун — светлый фуцзяньский улун с ароматом спелого ананаса. Фасовка от 100 г до 5 кг."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f5d730'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="/src/scss/main.scss" />
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#product">Перейти к товару</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-logo" href="https://teaboom.ru/">
+          <span class="site-logo__name">Чайный Бум</span>
+          <span class="site-logo__tagline">Интернет-магазин чая и посуды</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="container" id="product">
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <ol class="breadcrumbs__list">
+          <li class="breadcrumbs__item"><a href="https://teaboom.ru/">Главная</a></li>
+          <li class="breadcrumbs__item"><a href="https://teaboom.ru/category-root">Каталог</a></li>
+          <li class="breadcrumbs__item"><a href="https://teaboom.ru/category-ulun">Улун</a></li>
+          <li class="breadcrumbs__item">
+            <a href="https://teaboom.ru/category-aromatizirovannyj-ulun">Ароматизированный улун</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a href="https://teaboom.ru/category-kitajskij-svetlyj-aromatizirovannyj-ulun">
+              Китайский светлый ароматизированный улун
+            </a>
+          </li>
+          <li class="breadcrumbs__item" aria-current="page">Ананасовый улун</li>
+        </ol>
+      </nav>
+
+      <article class="product" aria-labelledby="product-title">
+        <figure class="product__media">
+          <!-- Фото товара: чтобы заменить, положите файл в src/assets/images и поменяйте путь ниже -->
+          <img
+            class="product__image"
+            src="./src/assets/images/ananasovyj-ulun.jpg"
+            alt="Сухой ананасовый улун: плотно скрученные зелёные листья с яркими кусочками цукатов"
+            width="970"
+            height="970"
+            fetchpriority="high"
+          />
+        </figure>
+
+        <div class="product__info">
+          <header class="product__header">
+            <a class="product__category" href="https://teaboom.ru/category-aromatizirovannyj-ulun">
+              Ароматизированный улун
+            </a>
+            <h1 class="product__title" id="product-title">Ананасовый улун</h1>
+            <p class="product__meta">
+              <span class="product__sku">Артикул: <span data-sku></span></span>
+              <span class="product__stock">В наличии</span>
+            </p>
+          </header>
+
+          <form class="buy-box" data-buy-form novalidate>
+            <fieldset class="pack-picker">
+              <legend class="pack-picker__legend">Фасовка</legend>
+              <div class="pack-picker__options" data-pack-options></div>
+            </fieldset>
+
+            <div class="buy-box__footer">
+              <p class="price" aria-live="polite" aria-atomic="true">
+                <span class="price__current">
+                  <span class="visually-hidden">Цена:</span>
+                  <span data-price></span>
+                </span>
+                <span class="price__old" data-old-price-wrap>
+                  <span class="visually-hidden">Старая цена:</span>
+                  <s data-old-price></s>
+                </span>
+                <span class="price__badge" data-discount></span>
+                <span class="price__unit" data-unit-price></span>
+              </p>
+
+              <button class="button button--primary buy-box__submit" type="submit">
+                <svg class="button__icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                  <path
+                    d="M3 4h2l2.4 10.2a1.5 1.5 0 0 0 1.46 1.16h8.48a1.5 1.5 0 0 0 1.45-1.12L20.5 8H6.2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="9.5" cy="19.5" r="1.5" fill="currentColor" />
+                  <circle cx="17" cy="19.5" r="1.5" fill="currentColor" />
+                </svg>
+                В корзину
+              </button>
+            </div>
+            <noscript>
+              <p class="buy-box__noscript">Для выбора фасовки и отображения цены включите JavaScript.</p>
+            </noscript>
+          </form>
+        </div>
+
+        <section class="product__about" aria-labelledby="about-title">
+          <h2 class="product__subtitle" id="about-title">О чае</h2>
+          <p>
+            Светлый фуцзяньский улун с ароматом ананаса. В сухом виде — крупный лист изумрудного цвета,
+            скруткой напоминающий Те Гуань Инь. В прогретой посуде раскрывается аромат свежей весенней
+            зелени и спелого ананаса.
+          </p>
+          <p>
+            Настой прозрачный, светло-янтарного цвета: классическая нота светлого улуна переплетается
+            с яркой ананасовой.
+          </p>
+          <p class="product__composition">
+            <strong>Состав:</strong> китайский бирюзовый чай, цукаты, натуральные ароматические масла.
+          </p>
+
+          <dl class="facts">
+            <div class="facts__item">
+              <dt>Происхождение</dt>
+              <dd>Китай, Фуцзянь</dd>
+            </div>
+            <div class="facts__item">
+              <dt>Температура воды</dt>
+              <dd>80–85&nbsp;°C</dd>
+            </div>
+            <div class="facts__item">
+              <dt>Заваривание</dt>
+              <dd>1–3 мин</dd>
+            </div>
+            <div class="facts__item">
+              <dt>На 500&nbsp;мл</dt>
+              <dd>2 ч.&nbsp;л.</dd>
+            </div>
+          </dl>
+        </section>
+      </article>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </body>
+</html>
