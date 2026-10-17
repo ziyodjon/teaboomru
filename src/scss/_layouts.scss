@@ -1,0 +1,178 @@
+@use 'mixins' as *;
+
+// --- Переключатель «Вариант 1 / Вариант 2» над хлебными крошками ---
+.layout-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-top: var(--space-5);
+
+  &__option {
+    min-height: 2.5rem;
+    padding: 0 var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text-body);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+
+    @include hover {
+      border-color: var(--color-text-muted);
+      color: var(--color-text);
+    }
+
+    &[aria-pressed='true'] {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-text);
+    }
+
+    &:focus-visible {
+      @include focus-ring(2px);
+    }
+  }
+
+  + .breadcrumbs {
+    padding-top: var(--space-4);
+  }
+}
+
+// =====================================================================
+// Вариант 2 — компактный: фасовки карточками, цена над фасовками,
+// на десктопе миниатюры слева от фото. Данные и разметка те же.
+// =====================================================================
+.product[data-layout='2'] {
+  // Галерея: миниатюры вертикальной колонкой слева
+  @include from(lg) {
+    .gallery {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .gallery__main {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .gallery__thumbs {
+      grid-column: 1;
+      grid-row: 1;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Блок покупки: цена и наличие сверху, затем фасовки и кнопка
+  .buy-box__summary {
+    display: contents;
+  }
+
+  // сбрасываем именованные области из варианта 1 — здесь порядок задаёт order
+  .buy-box__summary > * {
+    grid-area: auto;
+  }
+
+  .buy-box__actions {
+    order: 0;
+  }
+
+  .price {
+    order: 1;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-row-border);
+  }
+
+  .buy-box__meta {
+    order: 2;
+    margin-top: calc(-1 * var(--space-2));
+  }
+
+  .variants {
+    order: 3;
+  }
+
+  .buy-box__submit {
+    order: 4;
+    width: 100%;
+  }
+
+  .buy-box noscript {
+    order: 5;
+  }
+
+  // Фасовки — карточки-кнопки
+  .variants__list {
+    grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+    gap: var(--space-2);
+  }
+
+  .variant__row {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'name'
+      'prices'
+      'stock';
+    align-content: start;
+    row-gap: var(--space-1);
+    min-height: 0;
+    height: 100%;
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .variant__name {
+    padding: 0;
+  }
+
+  // справа от веса — место под индикатор выбора
+  .variant__weight {
+    padding-right: 1.5rem;
+  }
+
+  .variant__sku {
+    white-space: nowrap;
+  }
+
+  .variant__prices {
+    align-items: flex-start;
+  }
+
+  .variant__price {
+    font-size: 1rem;
+  }
+
+  .variant__check {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    background: none;
+
+    &::before {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  .variant__stock {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .variant__stock-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .variant__input:checked + .variant__row {
+    background: #f7fbe9;
+  }
+}

@@ -2,6 +2,7 @@ import { initGallery } from './gallery.js';
 import { initTabs } from './tabs.js';
 import { initCategories } from './categories.js';
 import { initFavorite } from './favorite.js';
+import { initLayoutSwitch } from './layout-switch.js';
 
 /**
  * Варианты фасовки — единственный источник данных о ценах, артикулах и наличии.
@@ -121,6 +122,8 @@ form.addEventListener('submit', (event) => {
   );
 });
 
+// Вариант оформления применяется первым, чтобы карточка не «перепрыгивала» после отрисовки
+initLayoutSwitch(document.querySelector('[data-layout-switch]'), document.querySelector('.product'));
 renderVariants();
 renderVariant(findVariant(DEFAULT_SKU));
 initGallery(document.querySelector('[data-gallery]'), document.querySelector('[data-lightbox]'));

@@ -106,6 +106,12 @@
 
     <div class="container page">
       <main class="page__main" id="product">
+        <!-- Переключатель вариантов оформления карточки; данные товара общие -->
+        <div class="layout-switch" role="group" aria-label="Вариант оформления карточки" data-layout-switch>
+          <button class="layout-switch__option" type="button" aria-pressed="true" data-layout-option="1">Вариант 1</button>
+          <button class="layout-switch__option" type="button" aria-pressed="false" data-layout-option="2">Вариант 2</button>
+        </div>
+
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
           <ol class="breadcrumbs__list">
             <li class="breadcrumbs__item"><a href="#">Начало</a></li>
@@ -118,7 +124,7 @@
           </ol>
         </nav>
 
-        <article class="product" aria-labelledby="product-title">
+        <article class="product" aria-labelledby="product-title" data-layout="1">
           <header class="product__header">
             <h1 class="product__title" id="product-title">Мате (yerba mate) Amanda Tradicional</h1>
             <p class="product__category">
