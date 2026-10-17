@@ -1,3 +1,5 @@
+import { initGallery } from './gallery.js';
+
 /**
  * Варианты фасовки — единственный источник данных о ценах и артикулах.
  * Цены хранятся в копейках (целые числа), чтобы избежать ошибок округления.
@@ -114,3 +116,4 @@ form.addEventListener('submit', (event) => {
 
 renderOptions();
 renderVariant(findVariant(DEFAULT_SKU));
+initGallery(document.querySelector('[data-gallery]'), document.querySelector('[data-lightbox]'));

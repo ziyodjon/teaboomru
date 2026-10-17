@@ -52,17 +52,47 @@
       </nav>
 
       <article class="product" aria-labelledby="product-title">
-        <figure class="product__media">
-          <!-- Фото товара: чтобы заменить, положите файл в src/assets/images и поменяйте путь ниже -->
-          <img
-            class="product__image"
-            src="./src/assets/images/ananasovyj-ulun.jpg"
-            alt="Сухой ананасовый улун: плотно скрученные зелёные листья с яркими кусочками цукатов"
-            width="970"
-            height="970"
-            fetchpriority="high"
-          />
-        </figure>
+        <div class="product__media gallery" data-gallery>
+          <figure class="gallery__main">
+            <!-- Главное фото — то же, что в первой миниатюре ниже -->
+            <img
+              class="gallery__image"
+              src="./src/assets/images/ananasovyj-ulun.jpg"
+              alt="Сухой ананасовый улун: плотно скрученные зелёные листья с яркими кусочками цукатов"
+              width="970"
+              height="970"
+              fetchpriority="high"
+              data-gallery-image
+            />
+            <button class="gallery__zoom" type="button" aria-label="Увеличить фото" data-gallery-zoom>
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26">
+                <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2" />
+                <path
+                  d="M10.5 7.5v6M7.5 10.5h6M15.4 15.4 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </figure>
+
+          <!-- Фото товара: чтобы добавить или заменить, положите файл в src/assets/images и добавьте/измените пункт списка -->
+          <ul class="gallery__thumbs" aria-label="Фотографии товара">
+            <li>
+              <button class="gallery__thumb" type="button" aria-current="true" data-gallery-thumb>
+                <img
+                  src="./src/assets/images/ananasovyj-ulun.jpg"
+                  alt="Сухой ананасовый улун: плотно скрученные зелёные листья с яркими кусочками цукатов"
+                  width="970"
+                  height="970"
+                  loading="lazy"
+                />
+              </button>
+            </li>
+          </ul>
+        </div>
 
         <div class="product__info">
           <header class="product__header">
@@ -154,6 +184,25 @@
         </section>
       </article>
     </main>
+
+    <dialog class="lightbox" aria-label="Фото товара" data-lightbox>
+      <button class="lightbox__control lightbox__close" type="button" aria-label="Закрыть" data-lightbox-close>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+          <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <button class="lightbox__control lightbox__prev" type="button" aria-label="Предыдущее фото" data-lightbox-prev>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+          <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button class="lightbox__control lightbox__next" type="button" aria-label="Следующее фото" data-lightbox-next>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+          <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <p class="lightbox__counter" data-lightbox-counter></p>
+    </dialog>
 
     <div class="toast" role="status" aria-live="polite" data-toast></div>
   </body>
