@@ -8,20 +8,21 @@ import { initLayoutSwitch } from './layout-switch.js';
  * Варианты фасовки — единственный источник данных о ценах, артикулах и наличии.
  * Цены хранятся в копейках (целые числа), чтобы избежать ошибок округления.
  * Артикулы — строки, чтобы не потерять ведущие нули.
- * stock — остаток на складе, подписи в STOCK_LABELS (как на teaboom.ru: «В наличии» / «Мало»).
+ * stock — остаток на складе, подписи в STOCK_LABELS (как на teaboom.ru: «Много» / «Мало»).
  */
 const VARIANTS = [
-  { weight: 500, sku: '31689', oldPrice: 155000, price: 149300, stock: 'many' },
-  { weight: 1000, sku: '31690', oldPrice: 240000, price: 218600, stock: 'few' },
-  { weight: 5000, sku: '31691', oldPrice: 975000, price: 893000, stock: 'few' },
+  { weight: 100, sku: '01306', oldPrice: 34920, price: 32640, stock: 'many' },
+  { weight: 500, sku: '01307', oldPrice: 164600, price: 143200, stock: 'many' },
+  { weight: 1000, sku: '01308', oldPrice: 259200, price: 206400, stock: 'many' },
+  { weight: 5000, sku: '01309', oldPrice: 871000, price: 632000, stock: 'many' },
 ];
 
 const STOCK_LABELS = {
-  many: { row: 'В наличии', summary: 'В наличии' },
+  many: { row: 'Много', summary: 'В наличии' },
   few: { row: 'Мало', summary: 'Мало в наличии' },
 };
 
-const DEFAULT_SKU = '31689';
+const DEFAULT_SKU = '01306';
 const TOAST_DURATION = 4000;
 
 const wholeRubles = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
@@ -138,7 +139,7 @@ document.querySelector('[data-review-link]').addEventListener('click', (event) =
   tabs.showPanel('panel-reviews');
 });
 
-initFavorite(document.querySelector('[data-favorite]'), 'teaboom:favorite:amanda-tradicional', (active) => {
+initFavorite(document.querySelector('[data-favorite]'), 'teaboom:favorite:ananasovij-ulun', (active) => {
   showToast(active ? 'Товар добавлен в избранное в этом браузере.' : 'Товар убран из избранного.');
 });
 

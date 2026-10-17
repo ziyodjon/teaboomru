@@ -2,7 +2,7 @@
   "name": "teaboom-product-card",
   "private": true,
   "version": "1.0.0",
-  "description": "Адаптивная карточка товара «Мате (yerba mate) Amanda Tradicional» для Teaboom.ru",
+  "description": "Адаптивная карточка товара «Ананасовый улун» для Teaboom.ru",
   "type": "module",
   "scripts": {
     "dev": "vite",

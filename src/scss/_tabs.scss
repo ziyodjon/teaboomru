@@ -85,6 +85,10 @@
 
   &__lead {
     max-width: 70ch;
+
+    & + & {
+      margin-top: var(--space-3);
+    }
   }
 
   &__heading {
@@ -97,7 +101,7 @@
   }
 }
 
-.steps {
+.content-list {
   max-width: 70ch;
   margin: 0;
   padding-left: 1.25rem;

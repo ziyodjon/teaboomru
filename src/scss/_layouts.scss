@@ -1,20 +1,51 @@
 @use 'mixins' as *;
 
-// --- Переключатель «Вариант 1 / Вариант 2» над хлебными крошками ---
+// --- Демо-панель «Вариант 1 / Вариант 2» над хлебными крошками ---
+// Оформлена как служебная плашка (пунктир, мелкий шрифт), чтобы не смешиваться с интерфейсом магазина.
 .layout-switch {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  padding-top: var(--space-5);
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-5);
+  padding: var(--space-2) var(--space-3);
+  background: rgb(255 255 255 / 0.85);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+  }
+
+  &__badge {
+    padding: 0.0625rem var(--space-2);
+    border-radius: var(--radius-sm);
+    background: var(--color-text);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__options {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
 
   &__option {
-    min-height: 2.5rem;
-    padding: 0 var(--space-5);
+    min-height: 2.25rem;
+    padding: 0 var(--space-4);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-pill);
     background: var(--color-surface);
     color: var(--color-text-body);
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     cursor: pointer;
     transition: background-color var(--transition), border-color var(--transition), color var(--transition);
@@ -25,9 +56,9 @@
     }
 
     &[aria-pressed='true'] {
-      background: var(--color-accent);
-      border-color: var(--color-accent);
-      color: var(--color-text);
+      background: var(--color-text);
+      border-color: var(--color-text);
+      color: #fff;
     }
 
     &:focus-visible {
@@ -89,9 +120,14 @@
   }
 
   // Фасовки — карточки-кнопки
+  // 2 колонки (4 фасовки — ровно 2×2), в широкой колонке — все в ряд
   .variants__list {
-    grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-2);
+
+    @container (min-width: 36rem) {
+      grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+    }
   }
 
   .variant__row {
