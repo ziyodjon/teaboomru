@@ -1,5 +1,7 @@
 # Карточка товара «Ананасовый улун» — Teaboom.ru
 
+**Демо:** https://ziyodjon.github.io/teaboomru/
+
 Адаптивная верхняя часть страницы товара интернет-магазина [Teaboom.ru](https://teaboom.ru/product/ananasovij-ulun)
 («Чайный Бум»). Это тестовое задание: только витринная часть карточки, без каталога, оформления заказа и реальной корзины.
 
@@ -79,6 +81,13 @@ npm run dev
 npm run build     # результат в папке dist/
 npm run preview   # локальный просмотр собранной версии
 ```
+
+## Деплой на GitHub Pages
+
+Workflow `.github/workflows/deploy.yml` на каждый push в `main` выполняет `npm ci`, `npm run build`
+и публикует папку `dist/` на GitHub Pages. Его можно запустить и вручную: Actions → Deploy to GitHub Pages → Run workflow.
+
+Однократная настройка репозитория: Settings → Pages → Build and deployment → Source: **GitHub Actions**.
 
 ## Данные товара
 
