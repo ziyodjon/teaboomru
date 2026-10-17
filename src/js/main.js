@@ -123,10 +123,14 @@ form.addEventListener('submit', (event) => {
 });
 
 // Вариант оформления применяется первым, чтобы карточка не «перепрыгивала» после отрисовки
-initLayoutSwitch(document.querySelector('[data-layout-switch]'), document.querySelector('.product'));
+const card = document.querySelector('.product');
+initLayoutSwitch(document.querySelector('[data-layout-switch]'), card);
 renderVariants();
 renderVariant(findVariant(DEFAULT_SKU));
-initGallery(document.querySelector('[data-gallery]'), document.querySelector('[data-lightbox]'));
+initGallery(document.querySelector('[data-gallery]'), document.querySelector('[data-lightbox]'), {
+  // листание фото наведением мыши — только во «Варианте 2»
+  hoverScrub: () => card.dataset.layout === '2',
+});
 const tabs = initTabs(document.querySelector('[data-tabs]'));
 
 document.querySelector('[data-review-link]').addEventListener('click', (event) => {
