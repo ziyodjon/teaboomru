@@ -51,6 +51,14 @@
     font-variant-numeric: tabular-nums;
   }
 
+  // «оставить отзыв» и «избранное», как над фасовками на сайте
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
   &__noscript {
     color: var(--color-sale);
     font-size: 0.875rem;
@@ -295,5 +303,61 @@
 
   &[data-level='few'] {
     color: var(--color-stock-low);
+  }
+}
+
+.review-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-size);
+  color: var(--color-text-body);
+  font-size: 0.9375rem;
+  text-decoration: none;
+
+  svg {
+    color: #3b3b3b;
+  }
+
+  @include hover {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+}
+
+.favorite {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--tap-size);
+  height: var(--tap-size);
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: #6b6b6b;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), transform var(--transition);
+
+  @include hover {
+    color: var(--color-sale);
+    border-color: var(--color-sale);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+
+  &:focus-visible {
+    @include focus-ring(2px);
+  }
+
+  &[aria-pressed='true'] {
+    color: var(--color-sale);
+    border-color: var(--color-sale);
+
+    path {
+      fill: currentColor;
+    }
   }
 }

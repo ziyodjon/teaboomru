@@ -1,5 +1,7 @@
 import { initGallery } from './gallery.js';
 import { initTabs } from './tabs.js';
+import { initCategories } from './categories.js';
+import { initFavorite } from './favorite.js';
 
 /**
  * Варианты фасовки — единственный источник данных о ценах, артикулах и наличии.
@@ -122,4 +124,15 @@ form.addEventListener('submit', (event) => {
 renderVariants();
 renderVariant(findVariant(DEFAULT_SKU));
 initGallery(document.querySelector('[data-gallery]'), document.querySelector('[data-lightbox]'));
-initTabs(document.querySelector('[data-tabs]'));
+const tabs = initTabs(document.querySelector('[data-tabs]'));
+
+document.querySelector('[data-review-link]').addEventListener('click', (event) => {
+  event.preventDefault();
+  tabs.showPanel('panel-reviews');
+});
+
+initFavorite(document.querySelector('[data-favorite]'), 'teaboom:favorite:amanda-tradicional', (active) => {
+  showToast(active ? 'Товар добавлен в избранное в этом браузере.' : 'Товар убран из избранного.');
+});
+
+initCategories(document.querySelector('[data-categories]'));

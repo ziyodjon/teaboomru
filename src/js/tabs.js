@@ -32,4 +32,14 @@ export function initTabs(root) {
       select(target, { focus: true });
     });
   });
+
+  return {
+    /** Открыть вкладку по id её панели, например из ссылки «оставить отзыв» */
+    showPanel(panelId) {
+      const index = panels.findIndex((panel) => panel.id === panelId);
+      if (index === -1) return;
+      select(index, { focus: true });
+      root.scrollIntoView({ block: 'start' });
+    },
+  };
 }
