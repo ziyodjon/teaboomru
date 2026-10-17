@@ -7,25 +7,47 @@
   padding-inline: var(--container-gutter);
 }
 
-// Упрощённая шапка — только для контекста страницы
+// --- Шапка в стиле teaboom.ru ---
 .site-header {
-  background: var(--color-cream);
-  border-bottom: 1px solid var(--color-border);
+  &__top {
+    background: var(--color-cream);
+  }
 
-  &__inner {
+  &__top-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-4);
+    min-height: 4.5rem;
+    padding-block: var(--space-2);
+  }
+
+  &__bar {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-row-border);
+  }
+
+  &__bar-inner {
     display: flex;
     align-items: center;
-    min-height: 4rem;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-block: var(--space-3);
+
+    @include from(lg) {
+      min-height: 5.5rem;
+    }
   }
 }
 
 .site-logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  padding-block: var(--space-2);
+  gap: var(--space-2);
+  color: #2b2a29;
   text-decoration: none;
-  line-height: 1.25;
+  line-height: 1.3;
 
   &__image {
     flex: none;
@@ -40,62 +62,216 @@
 
   &__name {
     font-size: 1.125rem;
-    font-weight: 800;
+    font-weight: 700;
+    white-space: nowrap;
   }
 
   &__tagline {
+    display: none;
     font-size: 0.8125rem;
-    color: var(--color-text-muted);
+
+    @include from(sm) {
+      display: block;
+    }
   }
 }
 
-.breadcrumbs {
-  padding-block: var(--space-4) var(--space-5);
+.site-contacts {
+  text-align: right;
   font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--color-text-muted);
 
   @include from(md) {
-    padding-block: var(--space-5) var(--space-6);
+    text-align: center;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0 var(--space-4);
+    font-weight: 700;
+
+    @include from(md) {
+      justify-content: center;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      min-height: 1.5rem;
+      color: var(--color-text);
+      text-decoration: none;
+
+      @include hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // На телефоне — только номер; почта и часы работы — с планшета
+  &__links a#{&}__email,
+  &__hours {
+    display: none;
+  }
+
+  @include from(md) {
+    &__links a#{&}__email {
+      display: inline-flex;
+    }
+
+    &__hours {
+      display: block;
+      margin-top: 0.125rem;
+      font-size: 0.6875rem;
+      line-height: 1.6;
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__text {
+    white-space: nowrap;
+  }
+}
+
+.main-nav {
+  display: none;
+
+  @include from(lg) {
+    display: block;
   }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1) 0;
+    gap: var(--space-1) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: var(--tap-size);
+    color: var(--color-nav);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color var(--transition);
+
+    @include hover {
+      color: var(--color-text);
+    }
+  }
+
+  a#{&}__gift {
+    color: var(--color-gift);
+  }
+}
+
+// Поиск — «пилюля» с жёлтой кнопкой, как на сайте
+.site-search {
+  display: flex;
+  flex: 1 1 auto;
+  max-width: 26rem;
+  padding: 3px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+
+  @include from(lg) {
+    flex: 0 1 26rem;
+  }
+
+  &:focus-within {
+    border-color: var(--color-text-muted);
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+    background: transparent;
+    color: var(--color-text-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+
+    &::placeholder {
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 4.5rem;
+    min-height: 2.5rem;
+    border: 0;
+    border-left: 1px solid var(--color-border);
+    border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+    background: var(--color-accent);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background-color var(--transition);
+
+    @include hover {
+      background: var(--color-accent-hover);
+    }
+
+    &:active {
+      background: var(--color-accent-active);
+    }
+
+    &:focus-visible {
+      @include focus-ring(2px);
+    }
+  }
+}
+
+// --- Хлебные крошки: «Начало - Каталог - …», как на сайте ---
+.breadcrumbs {
+  padding-block: var(--space-5) var(--space-2);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-body);
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.125rem 0;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   &__item {
-    display: inline-flex;
-    align-items: center;
     min-width: 0;
 
     & + &::before {
-      content: '';
-      flex: none;
-      width: 0.375rem;
-      height: 0.375rem;
-      margin-inline: var(--space-2);
-      border-top: 1.5px solid currentColor;
-      border-right: 1.5px solid currentColor;
-      transform: rotate(45deg);
-      opacity: 0.6;
+      content: '-';
+      margin-inline: 0.375rem;
+      color: var(--color-text-muted);
     }
 
     a {
+      color: inherit;
       text-decoration: none;
 
       @include hover {
         color: var(--color-text);
         text-decoration: underline;
       }
-    }
-
-    &[aria-current='page'] {
-      color: var(--color-text);
-      font-weight: 600;
     }
   }
 }

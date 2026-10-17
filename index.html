@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
     />
     <link rel="stylesheet" href="/src/scss/main.scss" />
     <script type="module" src="/src/js/main.js"></script>
@@ -21,22 +21,93 @@
   <body>
     <a class="skip-link" href="#product">Перейти к товару</a>
 
+    <!-- Шапка повторяет структуру teaboom.ru: контакты сверху, меню и поиск ниже -->
     <header class="site-header">
-      <div class="container site-header__inner">
-        <a class="site-logo" href="https://teaboom.ru/">
-          <img class="site-logo__image" src="./src/assets/images/logo.png" alt="" width="48" height="48" />
-          <span class="site-logo__text">
-            <span class="site-logo__name">Чайный Бум</span>
-            <span class="site-logo__tagline">Интернет-магазин чая и посуды</span>
-          </span>
-        </a>
+      <div class="site-header__top">
+        <div class="container site-header__top-inner">
+          <a class="site-logo" href="https://teaboom.ru/">
+            <img class="site-logo__image" src="./src/assets/images/logo.png" alt="" width="48" height="48" />
+            <span class="site-logo__text">
+              <span class="site-logo__name">Чайный Бум</span>
+              <span class="site-logo__tagline">Интернет-магазин чая и посуды</span>
+            </span>
+          </a>
+
+          <div class="site-contacts">
+            <p class="site-contacts__links">
+              <a href="tel:+74951201551">
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14">
+                  <path
+                    d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <span class="site-contacts__text">+7 (495) 120-15-51</span>
+              </a>
+              <a class="site-contacts__email" href="mailto:info@teaboom.ru">
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14">
+                  <path d="M3 6h18v12H3z M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+                info@teaboom.ru
+              </a>
+            </p>
+            <p class="site-contacts__hours">пн&nbsp;-&nbsp;пт с 10:00 до 19:00<br />сб&nbsp;-&nbsp;вс с 12:00 до 16:00</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-header__bar">
+        <div class="container site-header__bar-inner">
+          <nav class="main-nav" aria-label="Основное меню">
+            <ul class="main-nav__list">
+              <li><a href="https://teaboom.ru/">Главная</a></li>
+              <li><a href="https://teaboom.ru/category-root">Каталог</a></li>
+              <li>
+                <a class="main-nav__gift" href="https://teaboom.ru/category-podarki">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15">
+                    <path
+                      d="M3 8h18v4H3zM5 12h14v9H5zM12 8v13M12 8S10.5 3 8 3.5 7 8 12 8zm0 0s1.5-5 4-4.5S17 8 12 8z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  Подарки
+                </a>
+              </li>
+              <li><a href="https://teaboom.ru/pricelist">Прайслист</a></li>
+              <li><a href="https://teaboom.ru/shop_reviews/">Отзывы</a></li>
+              <li><a href="https://teaboom.ru/contact">Контакты</a></li>
+            </ul>
+          </nav>
+
+          <!-- Поиск ведёт на настоящий поиск teaboom.ru -->
+          <form class="site-search" role="search" action="https://teaboom.ru/search" method="get">
+            <label class="visually-hidden" for="site-search-input">Поиск по каталогу</label>
+            <input
+              class="site-search__input"
+              id="site-search-input"
+              type="search"
+              name="q"
+              placeholder="Начните вводить название товара…"
+              autocomplete="off"
+            />
+            <button class="site-search__button" type="submit" aria-label="Найти">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4" />
+                <path d="M15.5 15.5 20 20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+              </svg>
+            </button>
+          </form>
+        </div>
       </div>
     </header>
 
     <main class="container" id="product">
       <nav class="breadcrumbs" aria-label="Хлебные крошки">
         <ol class="breadcrumbs__list">
-          <li class="breadcrumbs__item"><a href="https://teaboom.ru/">Главная</a></li>
+          <li class="breadcrumbs__item"><a href="https://teaboom.ru/">Начало</a></li>
           <li class="breadcrumbs__item"><a href="https://teaboom.ru/category-root">Каталог</a></li>
           <li class="breadcrumbs__item"><a href="https://teaboom.ru/category-mate-i-lapacho">Мате и лапачо</a></li>
           <li class="breadcrumbs__item"><a href="https://teaboom.ru/category-mate">Мате</a></li>
@@ -47,6 +118,13 @@
       </nav>
 
       <article class="product" aria-labelledby="product-title">
+        <header class="product__header">
+          <h1 class="product__title" id="product-title">Мате (yerba mate) Amanda Tradicional</h1>
+          <p class="product__category">
+            Категория: <a href="https://teaboom.ru/category-mate">Мате</a>
+          </p>
+        </header>
+
         <div class="product__media gallery" data-gallery>
           <figure class="gallery__main">
             <!-- Главное фото — то же, что в первой миниатюре ниже -->
@@ -60,7 +138,7 @@
               data-gallery-image
             />
             <button class="gallery__zoom" type="button" aria-label="Увеличить фото" data-gallery-zoom>
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
                 <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2" />
                 <path
                   d="M10.5 7.5v6M7.5 10.5h6M15.4 15.4 20 20"
@@ -93,95 +171,117 @@
           </ul>
         </div>
 
-        <div class="product__info">
-          <header class="product__header">
-            <a class="product__category" href="https://teaboom.ru/category-mate">Мате</a>
-            <h1 class="product__title" id="product-title">Мате (yerba mate) Amanda Tradicional</h1>
-            <p class="product__meta">
-              <span class="product__sku">Артикул: <span data-sku></span></span>
-              <span class="product__stock" data-stock></span>
+        <form class="product__buy buy-box" data-buy-form novalidate>
+          <fieldset class="variants">
+            <legend class="variants__legend">Выберите фасовку</legend>
+            <div class="variants__list" data-variants></div>
+          </fieldset>
+
+          <!-- Строка варианта в стиле teaboom.ru; заполняется из массива VARIANTS в main.js -->
+          <template data-variant-template>
+            <label class="variant">
+              <input class="variant__input visually-hidden" type="radio" name="pack" />
+              <span class="variant__row">
+                <span class="variant__name">
+                  <span class="variant__weight" data-field="weight"></span>
+                  <span class="variant__sku">арт: <span data-field="sku"></span></span>
+                </span>
+                <span class="variant__prices">
+                  <span class="variant__price" data-field="price"></span>
+                  <s class="variant__old-price" data-field="oldPrice"></s>
+                </span>
+                <span class="variant__check" aria-hidden="true"></span>
+                <span class="variant__stock">
+                  <span class="variant__stock-label">наличие:</span>
+                  <span class="variant__stock-value" data-field="stock"></span>
+                </span>
+              </span>
+            </label>
+          </template>
+
+          <div class="buy-box__summary">
+            <p class="price" aria-live="polite" aria-atomic="true">
+              <span class="price__current">
+                <span class="visually-hidden">Цена:</span>
+                <span data-price></span>
+              </span>
+              <span class="price__old" data-old-price-wrap>
+                <span class="visually-hidden">Старая цена:</span>
+                <s data-old-price></s>
+              </span>
+              <span class="price__badge" data-discount></span>
+              <span class="price__unit" data-unit-price></span>
             </p>
-          </header>
 
-          <form class="buy-box" data-buy-form novalidate>
-            <fieldset class="pack-picker">
-              <legend class="pack-picker__legend">Фасовка</legend>
-              <div class="pack-picker__options" data-pack-options></div>
-            </fieldset>
+            <p class="buy-box__meta">
+              <span>Артикул: <span class="buy-box__sku" data-sku></span></span>
+              <span class="stock" data-stock></span>
+            </p>
 
-            <div class="buy-box__footer">
-              <p class="price" aria-live="polite" aria-atomic="true">
-                <span class="price__current">
-                  <span class="visually-hidden">Цена:</span>
-                  <span data-price></span>
-                </span>
-                <span class="price__old" data-old-price-wrap>
-                  <span class="visually-hidden">Старая цена:</span>
-                  <s data-old-price></s>
-                </span>
-                <span class="price__badge" data-discount></span>
-                <span class="price__unit" data-unit-price></span>
-              </p>
+            <button class="button button--primary buy-box__submit" type="submit">
+              <svg class="button__icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                <path
+                  d="M3 4h2l2.4 10.2a1.5 1.5 0 0 0 1.46 1.16h8.48a1.5 1.5 0 0 0 1.45-1.12L20.5 8H6.2"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle cx="9.5" cy="19.5" r="1.5" fill="currentColor" />
+                <circle cx="17" cy="19.5" r="1.5" fill="currentColor" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+          <noscript>
+            <p class="buy-box__noscript">Для выбора фасовки и отображения цены включите JavaScript.</p>
+          </noscript>
+        </form>
 
-              <button class="button button--primary buy-box__submit" type="submit">
-                <svg class="button__icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
-                  <path
-                    d="M3 4h2l2.4 10.2a1.5 1.5 0 0 0 1.46 1.16h8.48a1.5 1.5 0 0 0 1.45-1.12L20.5 8H6.2"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <circle cx="9.5" cy="19.5" r="1.5" fill="currentColor" />
-                  <circle cx="17" cy="19.5" r="1.5" fill="currentColor" />
-                </svg>
-                В корзину
-              </button>
-            </div>
-            <noscript>
-              <p class="buy-box__noscript">Для выбора фасовки и отображения цены включите JavaScript.</p>
-            </noscript>
-          </form>
-        </div>
+        <!-- Вкладки как на teaboom.ru: тёмная панель с заголовками и кремовый блок с содержимым -->
+        <section class="product__tabs tabs" aria-label="Информация о товаре" data-tabs>
+          <div class="tabs__list" role="tablist">
+            <button class="tabs__tab" id="tab-description" type="button" role="tab" aria-selected="true" aria-controls="panel-description">
+              Описание
+            </button>
+            <button class="tabs__tab" id="tab-specs" type="button" role="tab" aria-selected="false" aria-controls="panel-specs" tabindex="-1">
+              Свойства
+            </button>
+          </div>
 
-        <section class="product__about" aria-labelledby="about-title">
-          <h2 class="product__subtitle" id="about-title">Описание</h2>
-          <p>
-            Мате Amanda Tradicional крупного помола с листьями, веточками и значительным количеством пыли.
-            Обеспечивает полный, глубокий, классический вкус. Не рекомендуется использовать очень горячую воду,
-            чтобы избежать горечи во вкусе.
-          </p>
+          <div class="tabs__panel" id="panel-description" role="tabpanel" aria-labelledby="tab-description" tabindex="0">
+            <p class="tabs__lead">
+              Мате Amanda Tradicional крупного помола с листьями, веточками и значительным количеством пыли.
+              Обеспечивает полный, глубокий, классический вкус. Не рекомендуется использовать очень горячую воду,
+              чтобы избежать горечи во вкусе.
+            </p>
 
-          <h3 class="product__subtitle product__subtitle--small">Способ приготовления</h3>
-          <ol class="steps">
-            <li>Приблизительно на 2/3 от объёма калабаса засыпается мате.</li>
-            <li>Накрыв сосуд ладонью, хорошо встряхните.</li>
-            <li>Наклоните посуду таким образом, чтобы весь чай ссыпался к одной стороне.</li>
-            <li>В калабас вставляем бомбилью и прижимаем к тому месту, где нет заварки.</li>
-            <li>Возвращаем сосуд в правильное положение.</li>
-            <li>Верх трубочки прижимаем пальцем и наливаем немного горячей воды, чтобы вся заварка намокла.</li>
-            <li>Через 2–3 мин мате хорошо разбухнет, и можно наполнить сосуд водой до верха.</li>
-          </ol>
+            <h2 class="tabs__heading">Способ приготовления</h2>
+            <ol class="steps">
+              <li>Приблизительно на 2/3 от объёма калабаса засыпается мате.</li>
+              <li>Накрыв сосуд ладонью, хорошо встряхните.</li>
+              <li>Наклоните посуду таким образом, чтобы весь чай ссыпался к одной стороне.</li>
+              <li>В калабас вставляем бомбилью и прижимаем к тому месту, где нет заварки.</li>
+              <li>Возвращаем сосуд в правильное положение.</li>
+              <li>Верх трубочки прижимаем пальцем и наливаем немного горячей воды, чтобы вся заварка намокла.</li>
+              <li>Через 2–3 мин мате хорошо разбухнет, и можно наполнить сосуд водой до верха.</li>
+            </ol>
+          </div>
 
-          <dl class="facts">
-            <div class="facts__item">
-              <dt>Происхождение</dt>
-              <dd>Аргентина, Миссионес</dd>
-            </div>
-            <div class="facts__item">
-              <dt>Выдержка</dt>
-              <dd>18 месяцев</dd>
-            </div>
-            <div class="facts__item">
-              <dt>Помол</dt>
-              <dd>Крупный</dd>
-            </div>
-            <div class="facts__item">
-              <dt>Кофеин</dt>
-              <dd>Высокое содержание</dd>
-            </div>
-          </dl>
+          <div class="tabs__panel" id="panel-specs" role="tabpanel" aria-labelledby="tab-specs" tabindex="0" hidden>
+            <dl class="specs">
+              <div class="specs__row"><dt>Выдержка</dt><dd>18 месяцев</dd></div>
+              <div class="specs__row"><dt>Категории мате</dt><dd>Классический</dd></div>
+              <div class="specs__row"><dt>Категория</dt><dd>Натуральный</dd></div>
+              <div class="specs__row"><dt>Кофеин</dt><dd>Высокое содержание</dd></div>
+              <div class="specs__row"><dt>Район происхождения</dt><dd>Миссионес</dd></div>
+              <div class="specs__row"><dt>Страна произрастания</dt><dd>Аргентина</dd></div>
+              <div class="specs__row"><dt>Упаковка</dt><dd>Бумажная с фольгой</dd></div>
+              <div class="specs__row"><dt>Фасовка</dt><dd>500 г, 1000 г, 5000 г</dd></div>
+              <div class="specs__row"><dt>Форма листа</dt><dd>Крупный помол</dd></div>
+            </dl>
+          </div>
         </section>
       </article>
     </main>

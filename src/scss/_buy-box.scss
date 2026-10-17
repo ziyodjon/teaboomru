@@ -3,27 +3,52 @@
 .buy-box {
   container-type: inline-size;
   display: grid;
-  gap: var(--space-5);
-  padding: var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  gap: var(--space-4);
 
-  @include from(sm) {
-    padding: var(--space-5);
-  }
-
-  &__footer {
+  &__summary {
     display: grid;
-    gap: var(--space-4);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--color-border);
+    gap: var(--space-3) var(--space-5);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-row-border);
+
+    @include from(sm) {
+      padding: var(--space-5);
+    }
 
     @container (min-width: 30rem) {
       grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'price button'
+        'meta button';
       align-items: center;
+
+      .price {
+        grid-area: price;
+      }
+
+      .buy-box__meta {
+        grid-area: meta;
+      }
+
+      .buy-box__submit {
+        grid-area: button;
+      }
     }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  &__sku {
+    color: var(--color-text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
   }
 
   &__noscript {
@@ -32,8 +57,8 @@
   }
 }
 
-// --- Выбор фасовки: нативная radio-группа ---
-.pack-picker {
+// --- Фасовки: строки как на teaboom.ru, но с выбором варианта (radio-группа) ---
+.variants {
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -41,119 +66,189 @@
 
   &__legend {
     padding: 0;
-    margin-bottom: var(--space-3);
-    font-size: 0.9375rem;
+    margin-bottom: var(--space-2);
+    font-size: 0.875rem;
     font-weight: 700;
+    color: var(--color-text);
   }
 
-  &__options {
+  &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
-    gap: var(--space-2);
+    gap: 0.375rem;
     // резерв высоты до отрисовки вариантов скриптом
-    min-height: 4rem;
+    min-height: 3.5rem;
   }
 }
 
-.pack-option {
-  position: relative;
+.variant {
   display: block;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
-  &__card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.125rem;
-    min-height: 4rem;
-    height: 100%;
-    // справа — место под индикатор выбора
-    padding: var(--space-3) 1.75rem var(--space-3) var(--space-3);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-md);
-    line-height: 1.25;
+  &__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto 2.75rem;
+    grid-template-areas:
+      'name prices check'
+      'stock prices check';
+    align-items: center;
+    column-gap: var(--space-3);
+    min-height: 3.5rem;
+    padding-left: var(--space-3);
+    background: var(--color-row);
+    border: 1px solid var(--color-row-border);
     transition:
       border-color var(--transition),
       background-color var(--transition),
       box-shadow var(--transition);
 
-    // Индикатор выбора: пустой кружок → кружок с галочкой
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0.375rem;
-      right: 0.375rem;
-      width: 1rem;
-      height: 1rem;
-      border: 1.5px solid var(--color-border-strong);
-      border-radius: 50%;
-      background: var(--color-surface) center / 0.75rem no-repeat;
-      transition: background-color var(--transition), border-color var(--transition);
+    @container (min-width: 25rem) {
+      grid-template-columns: minmax(0, 1fr) auto 2.75rem 6.5rem;
+      grid-template-areas: 'name prices check stock';
+      padding-left: var(--space-4);
+    }
+  }
+
+  &__name {
+    grid-area: name;
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--space-2);
+    line-height: 1.3;
+
+    @container (min-width: 25rem) {
+      padding-block: var(--space-2);
     }
   }
 
   &__weight {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-weight: 700;
+    color: var(--color-text);
     white-space: nowrap;
   }
 
-  &__price {
-    font-size: 0.8125rem;
+  &__sku {
+    font-size: 0.6875rem;
+    font-weight: 600;
     color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__prices {
+    grid-area: prices;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.25;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
 
-  @include hover {
-    .pack-option__card {
-      border-color: var(--color-text-muted);
+  &__price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-sale);
+  }
+
+  &__old-price {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  // Зелёная ячейка справа — на сайте здесь иконка корзины, у нас индикатор выбора
+  &__check {
+    grid-area: check;
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    background: var(--color-green-light);
+
+    &::before {
+      content: '';
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid #9db46a;
+      border-radius: 50%;
+      background: var(--color-surface) center / 0.8rem no-repeat;
+      transition: background-color var(--transition), border-color var(--transition);
     }
   }
 
-  &__input:checked + &__card {
-    background: var(--color-selected-bg);
+  &__stock {
+    grid-area: stock;
+    display: flex;
+    gap: var(--space-1);
+    align-items: baseline;
+    padding-bottom: var(--space-2);
+    line-height: 1.3;
+
+    @container (min-width: 25rem) {
+      flex-direction: column;
+      gap: 0;
+      padding: var(--space-2) var(--space-3);
+    }
+  }
+
+  &__stock-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  &__stock-value {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-stock);
+
+    &[data-level='few'] {
+      color: var(--color-stock-low);
+    }
+  }
+
+  @include hover {
+    .variant__row {
+      border-color: var(--color-border-strong);
+    }
+  }
+
+  &__input:checked + &__row {
+    background: var(--color-surface);
     border-color: var(--color-selected);
     box-shadow: inset 0 0 0 1px var(--color-selected);
-
-    &::after {
-      border-color: var(--color-selected);
-      background-color: var(--color-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    }
   }
 
-  &__input:checked + &__card &__price {
-    color: var(--color-text);
+  &__input:checked + &__row &__check::before {
+    border-color: var(--color-selected);
+    background-color: var(--color-selected);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 
-  &__input:focus-visible + &__card {
+  &__input:focus-visible + &__row {
     @include focus-ring(2px);
   }
 }
 
-// --- Цена ---
+// --- Цена выбранной фасовки ---
 .price {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-1) var(--space-3);
-  min-height: 4.25rem;
   font-variant-numeric: tabular-nums;
 
   &__current {
-    font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
-    font-weight: 800;
+    font-size: clamp(1.75rem, 1.55rem + 0.8vw, 2rem);
+    font-weight: 700;
     line-height: 1.1;
     color: var(--color-sale);
     white-space: nowrap;
   }
 
   &__old {
-    font-size: 1.0625rem;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--color-text-muted);
     white-space: nowrap;
 
@@ -164,7 +259,7 @@
 
   &__badge {
     align-self: center;
-    padding: 0.125rem var(--space-2);
+    padding: 0.0625rem var(--space-2);
     background: var(--color-sale-bg);
     color: #a8101a;
     border-radius: var(--radius-pill);
@@ -180,5 +275,25 @@
 
   [hidden] {
     display: none;
+  }
+}
+
+.stock {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-stock);
+  font-weight: 700;
+
+  &::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &[data-level='few'] {
+    color: var(--color-stock-low);
   }
 }

@@ -15,10 +15,11 @@ html {
 body {
   margin: 0;
   min-width: 20rem;
-  background: var(--color-bg);
-  color: var(--color-text);
+  // фирменный узор teaboom.ru (чашки и чайники)
+  background: var(--color-bg) url('../assets/images/pattern.png') center top / 1235px auto repeat;
+  color: var(--color-text-body);
   font-family: var(--font-base);
-  font-size: 1rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }

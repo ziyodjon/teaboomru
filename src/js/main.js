@@ -1,10 +1,11 @@
 import { initGallery } from './gallery.js';
+import { initTabs } from './tabs.js';
 
 /**
  * Варианты фасовки — единственный источник данных о ценах, артикулах и наличии.
  * Цены хранятся в копейках (целые числа), чтобы избежать ошибок округления.
  * Артикулы — строки, чтобы не потерять ведущие нули.
- * stock — остаток на складе, подписи в STOCK_LABELS.
+ * stock — остаток на складе, подписи в STOCK_LABELS (как на teaboom.ru: «В наличии» / «Мало»).
  */
 const VARIANTS = [
   { weight: 500, sku: '31689', oldPrice: 155000, price: 149300, stock: 'many' },
@@ -12,7 +13,10 @@ const VARIANTS = [
   { weight: 5000, sku: '31691', oldPrice: 975000, price: 893000, stock: 'few' },
 ];
 
-const STOCK_LABELS = { many: 'В наличии', few: 'Мало в наличии' };
+const STOCK_LABELS = {
+  many: { row: 'В наличии', summary: 'В наличии' },
+  few: { row: 'Мало', summary: 'Мало в наличии' },
+};
 
 const DEFAULT_SKU = '31689';
 const TOAST_DURATION = 4000;
@@ -31,7 +35,8 @@ const formatWeight = (grams) => `${grams} г`;
 const discountPercent = ({ price, oldPrice }) => Math.round((1 - price / oldPrice) * 100);
 
 const form = document.querySelector('[data-buy-form]');
-const optionsRoot = form.querySelector('[data-pack-options]');
+const variantsRoot = form.querySelector('[data-variants]');
+const variantTemplate = form.querySelector('[data-variant-template]');
 const fields = {
   sku: document.querySelector('[data-sku]'),
   stock: document.querySelector('[data-stock]'),
@@ -43,45 +48,40 @@ const fields = {
 };
 const toast = document.querySelector('[data-toast]');
 
-function renderOptions() {
+function renderVariants() {
   const fragment = document.createDocumentFragment();
 
   VARIANTS.forEach((variant) => {
-    const label = document.createElement('label');
-    label.className = 'pack-option';
+    const row = variantTemplate.content.cloneNode(true);
+    const input = row.querySelector('input');
+    const field = (name) => row.querySelector(`[data-field="${name}"]`);
 
-    const input = document.createElement('input');
-    input.className = 'pack-option__input visually-hidden';
-    input.type = 'radio';
-    input.name = 'pack';
     input.value = variant.sku;
     input.checked = variant.sku === DEFAULT_SKU;
+    field('weight').textContent = formatWeight(variant.weight);
+    field('sku').textContent = variant.sku;
+    field('price').textContent = formatPrice(variant.price);
+    field('stock').textContent = STOCK_LABELS[variant.stock].row;
+    field('stock').dataset.level = variant.stock;
 
-    const card = document.createElement('span');
-    card.className = 'pack-option__card';
+    if (variant.oldPrice > variant.price) {
+      field('oldPrice').textContent = formatPrice(variant.oldPrice);
+    } else {
+      field('oldPrice').remove();
+    }
 
-    const weight = document.createElement('span');
-    weight.className = 'pack-option__weight';
-    weight.textContent = formatWeight(variant.weight);
-
-    const price = document.createElement('span');
-    price.className = 'pack-option__price';
-    price.textContent = formatPrice(variant.price);
-
-    card.append(weight, price);
-    label.append(input, card);
-    fragment.append(label);
+    fragment.append(row);
   });
 
-  optionsRoot.replaceChildren(fragment);
+  variantsRoot.replaceChildren(fragment);
 }
 
 function renderVariant(variant) {
   const hasDiscount = variant.oldPrice > variant.price;
 
   fields.sku.textContent = variant.sku;
-  fields.stock.textContent = STOCK_LABELS[variant.stock];
-  fields.stock.dataset.stock = variant.stock;
+  fields.stock.textContent = STOCK_LABELS[variant.stock].summary;
+  fields.stock.dataset.level = variant.stock;
   fields.price.textContent = formatPrice(variant.price);
   fields.oldPriceWrap.hidden = !hasDiscount;
   fields.discount.hidden = !hasDiscount;
@@ -107,7 +107,7 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove('is-visible'), TOAST_DURATION);
 }
 
-optionsRoot.addEventListener('change', (event) => {
+variantsRoot.addEventListener('change', (event) => {
   renderVariant(findVariant(event.target.value));
 });
 
@@ -119,6 +119,7 @@ form.addEventListener('submit', (event) => {
   );
 });
 
-renderOptions();
+renderVariants();
 renderVariant(findVariant(DEFAULT_SKU));
 initGallery(document.querySelector('[data-gallery]'), document.querySelector('[data-lightbox]'));
+initTabs(document.querySelector('[data-tabs]'));
