@@ -54,15 +54,11 @@
 
   &__thumbs {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(4.5rem, 6rem));
     gap: var(--space-2);
     margin: 0;
     padding: 0;
     list-style: none;
-
-    @include from(sm) {
-      grid-template-columns: repeat(auto-fill, minmax(5.5rem, 7rem));
-    }
   }
 
   &__thumb {

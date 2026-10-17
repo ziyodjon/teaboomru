@@ -1,18 +1,20 @@
 import { initGallery } from './gallery.js';
 
 /**
- * Варианты фасовки — единственный источник данных о ценах и артикулах.
+ * Варианты фасовки — единственный источник данных о ценах, артикулах и наличии.
  * Цены хранятся в копейках (целые числа), чтобы избежать ошибок округления.
- * Артикулы — строки, чтобы сохранить ведущие нули.
+ * Артикулы — строки, чтобы не потерять ведущие нули.
+ * stock — остаток на складе, подписи в STOCK_LABELS.
  */
 const VARIANTS = [
-  { weight: 100, sku: '01306', oldPrice: 34920, price: 32640 },
-  { weight: 500, sku: '01307', oldPrice: 164600, price: 143200 },
-  { weight: 1000, sku: '01308', oldPrice: 259200, price: 206400 },
-  { weight: 5000, sku: '01309', oldPrice: 871000, price: 632000 },
+  { weight: 500, sku: '31689', oldPrice: 155000, price: 149300, stock: 'many' },
+  { weight: 1000, sku: '31690', oldPrice: 240000, price: 218600, stock: 'few' },
+  { weight: 5000, sku: '31691', oldPrice: 975000, price: 893000, stock: 'few' },
 ];
 
-const DEFAULT_SKU = '01306';
+const STOCK_LABELS = { many: 'В наличии', few: 'Мало в наличии' };
+
+const DEFAULT_SKU = '31689';
 const TOAST_DURATION = 4000;
 
 const wholeRubles = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
@@ -32,6 +34,7 @@ const form = document.querySelector('[data-buy-form]');
 const optionsRoot = form.querySelector('[data-pack-options]');
 const fields = {
   sku: document.querySelector('[data-sku]'),
+  stock: document.querySelector('[data-stock]'),
   price: form.querySelector('[data-price]'),
   oldPrice: form.querySelector('[data-old-price]'),
   oldPriceWrap: form.querySelector('[data-old-price-wrap]'),
@@ -77,6 +80,8 @@ function renderVariant(variant) {
   const hasDiscount = variant.oldPrice > variant.price;
 
   fields.sku.textContent = variant.sku;
+  fields.stock.textContent = STOCK_LABELS[variant.stock];
+  fields.stock.dataset.stock = variant.stock;
   fields.price.textContent = formatPrice(variant.price);
   fields.oldPriceWrap.hidden = !hasDiscount;
   fields.discount.hidden = !hasDiscount;
